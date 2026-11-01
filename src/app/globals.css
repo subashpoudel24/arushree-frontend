@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #fffcf0;
+  --color-sand: #f6efdc;
+  --color-gold: #e3c67f;
+  --color-gold-strong: #d4b05c;
+  --color-bronze: #80621c;
+  --color-ink: #2b2518;
+  --color-muted: #6b6250;
+  --color-line: #e8dfc8;
+  --color-danger: #b42318;
+  --color-success: #17693b;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.eyebrow {
+  color: var(--color-bronze);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* The signature shape: images framed like a boutique window. */
+.arch {
+  border-radius: 999px 999px 1.25rem 1.25rem;
+}
+
+.link-line {
+  background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+  transition: background-size 0.3s ease;
+}
+.link-line:hover,
+.link-line[aria-current='page'] {
+  background-size: 100% 1px;
+}
+
+.prose-editorial > p:first-of-type::first-letter {
+  color: var(--color-bronze);
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.85;
+  padding: 0.35rem 0.6rem 0 0;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+}
+@keyframes word-up {
+  from {
+    transform: translateY(110%);
+  }
+}
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.12);
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes drift {
+  50% {
+    transform: translateY(-0.75rem);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Movement is added only here, so everything stays visible and readable without it. */
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  .word > span {
+    animation: word-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  .slow-zoom {
+    animation: slow-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .spin-slow {
+    animation: spin-slow 24s linear infinite;
+  }
+  .drift {
+    animation: drift 6s ease-in-out infinite;
+  }
+  .fade-in {
+    animation: fade 0.8s ease both;
+  }
+
+  /* Reveal on scroll, without JavaScript. Browsers without support just show the content. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-range: entry 5% entry 45%;
+      animation-timeline: view();
+    }
+  }
+}
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  vertical-align: bottom;
+}
+.word > span {
+  display: inline-block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
